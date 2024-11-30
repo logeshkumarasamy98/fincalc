@@ -56,4 +56,3 @@ jobs:
             project_id: 'logesh-all-test'
             region: 'us-central1'
             service: 'fincalc'
-            labels: 'logesh'
