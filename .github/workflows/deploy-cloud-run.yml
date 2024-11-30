@@ -14,11 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Authorize to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: logesh-all-test
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
       # Step 2: Set up Google Cloud SDK
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: ${{  }}
           project_id: logesh-all-test
 
       # Step 3: Configure Docker
