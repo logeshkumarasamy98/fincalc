@@ -49,10 +49,11 @@ jobs:
       #       --allow-unauthenticated
 
       - name: Deploy Application to Cloud Run
-        uses: 'google-github-actions/deploy-cloudrun@v1'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
             image: 'us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:2'
+            job: 'fincalc'
             suffix: 'testlog-1'
             project_id: 'logesh-all-test'
             region: 'us-central1'
-            job: 'fincalc'
+            
