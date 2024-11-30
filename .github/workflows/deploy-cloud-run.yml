@@ -44,7 +44,6 @@ jobs:
           IMAGE_NAME=us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:1
           gcloud run deploy fincalc \
             --image $IMAGE_NAME \
-            --suffix fincalc-1 \
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated
