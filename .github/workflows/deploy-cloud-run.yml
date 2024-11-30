@@ -1,0 +1,43 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Google Cloud SDK
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: logesh-all-test
+
+      # Step 3: Configure Docker
+      - name: Authenticate Docker with GCP
+        run: gcloud auth configure-docker
+
+      # Step 4: Build and push Docker image
+      - name: Build and push Docker image
+        run: |
+          IMAGE_NAME=gcr.io/logesh-all-test/fincalc
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
+
+      # Step 5: Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE_NAME=gcr.io/gcr.io/logesh-all-test/fincalc
+          gcloud run deploy your-service-name \
+            --image $IMAGE_NAME \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated
