@@ -34,7 +34,7 @@ jobs:
       # Step 4: Build and push Docker image
       - name: Build and push Docker image
         run: |
-          IMAGE_NAME=us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:2
+          IMAGE_NAME=us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:3
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
@@ -51,7 +51,7 @@ jobs:
       - name: Deploy Application to Cloud Run
         uses: 'google-github-actions/deploy-cloudrun@v2'
         with:
-            image: 'us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:2'
+            image: 'us-central1-docker.pkg.dev/logesh-all-test/cloud-run-source-deploy/fincalc:3'
             job: 'fincalc'
             suffix: 'testlog-1'
             project_id: 'logesh-all-test'
