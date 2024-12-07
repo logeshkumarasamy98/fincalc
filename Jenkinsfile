@@ -18,7 +18,7 @@ cd /home/logesh/test &&
 ls
 "
 
-ssh -i $SSH_KEY_PATH $SERVER_USER@$SERVER_IP "$REMOTE_COMMANDS"
+ssh -o StrictHostKeyChecking=no -i $SSH_KEY_PATH $SERVER_USER@$SERVER_IP "$REMOTE_COMMANDS"
 '''
       }
     }
