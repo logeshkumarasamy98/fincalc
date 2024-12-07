@@ -9,16 +9,17 @@ pipeline {
 
     stage('check') {
       steps {
-        sh '''SSH_KEY_PATH="/var/lib/jenkins/.ssh/id_rsa"  
-SERVER_USER="logesh"                     
-SERVER_IP="127.0.0.1"        
+        sh '''SSH_KEY_PATH="/home/logesh/.ssh/id_rsa"
+SERVER_USER="logesh"
+SERVER_IP="127.0.0.1"
 
 REMOTE_COMMANDS="
 cd /home/logesh/test &&
 ls
 "
 
-ssh -i $SSH_KEY_PATH $SERVER_USER@$SERVER_IP "$REMOTE_COMMANDS"             '''
+ssh -i $SSH_KEY_PATH $SERVER_USER@$SERVER_IP "$REMOTE_COMMANDS"
+'''
       }
     }
 
