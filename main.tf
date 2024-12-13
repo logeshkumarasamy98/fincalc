@@ -1,4 +1,5 @@
 resource "google_compute_instance" "example" {
+  project      = "logesh-all-test" # Explicitly set project ID
   name         = "fincalc"
   machine_type = "e2-small"
   zone         = "us-central1-f"
@@ -14,7 +15,6 @@ resource "google_compute_instance" "example" {
   network_interface {
     network    = "default"
     subnetwork = "default"
-
     access_config {
       network_tier = "PREMIUM"
     }
@@ -44,10 +44,5 @@ resource "google_compute_instance" "example" {
     automatic_restart   = true
     on_host_maintenance = "MIGRATE"
     preemptible         = false
-  }
-
-  # Ensure changes are applied, not recreated
-  lifecycle {
-    prevent_destroy = false
   }
 }
