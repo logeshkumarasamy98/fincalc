@@ -15,6 +15,7 @@ resource "google_compute_instance" "example" {
   network_interface {
     network    = "default"
     subnetwork = "default"
+    subnetwork_project = "logesh-all-test"
     access_config {
       network_tier = "PREMIUM"
     }
