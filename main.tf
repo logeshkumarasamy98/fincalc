@@ -1,18 +1,3 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-    }
-  }
-}
-
-provider "google" {
-  project = "logesh-all-test"
-  region  = "us-central1"
-  zone    = "us-central1-f"
-}
-
 resource "google_compute_instance" "example" {
   name         = "fincalc"
   machine_type = "e2-small"
@@ -31,7 +16,6 @@ resource "google_compute_instance" "example" {
     subnetwork = "default"
 
     access_config {
-      
       network_tier = "PREMIUM"
     }
   }
@@ -60,5 +44,10 @@ resource "google_compute_instance" "example" {
     automatic_restart   = true
     on_host_maintenance = "MIGRATE"
     preemptible         = false
+  }
+
+  # Ensure changes are applied, not recreated
+  lifecycle {
+    prevent_destroy = false
   }
 }
