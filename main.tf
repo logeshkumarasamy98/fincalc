@@ -31,7 +31,7 @@ resource "google_compute_instance" "example" {
     subnetwork = "default"
 
     access_config {
-      nat_ip       = "34.55.209.160" # Optional, can be omitted for auto-assigned IP
+      
       network_tier = "PREMIUM"
     }
   }
