@@ -4,6 +4,8 @@ resource "google_compute_instance" "example" {
   machine_type = "e2-medium"
   zone         = "us-central1-f"
 
+  allow_stopping_for_update = true
+
   boot_disk {
     initialize_params {
       image = "projects/ubuntu-os-cloud/global/images/ubuntu-2404-noble-amd64-v20241115"
