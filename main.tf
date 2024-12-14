@@ -1,7 +1,7 @@
 resource "google_compute_instance" "example" {
   project      = "logesh-all-test" # Explicitly set project ID
   name         = "fincalc"
-  machine_type = "e2-medium"
+  machine_type = "e2-small"
   zone         = "us-central1-f"
 
   allow_stopping_for_update = true
