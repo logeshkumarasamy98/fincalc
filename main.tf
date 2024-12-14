@@ -1,7 +1,7 @@
 resource "google_compute_instance" "example" {
   project      = "logesh-all-test" # Explicitly set project ID
   name         = "fincalc"
-  machine_type = "e2-small"
+  machine_type = "e2-medium"
   zone         = "us-central1-f"
 
   boot_disk {
