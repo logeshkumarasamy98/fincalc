@@ -8,7 +8,7 @@ import { Toaster } from '@/components/ui/toaster';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'FinCalc',
+  title: 'LogeshTest',
   description: 'Comprehensive financial calculator for EMI, loans, and investments',
 };
 
