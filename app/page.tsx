@@ -35,7 +35,7 @@ export default function Home() {
     <div className="flex flex-col items-center space-y-8 pt-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          Financial Calculator
+          Test
         </h1>
         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
           Make informed financial decisions with our comprehensive suite of calculators
