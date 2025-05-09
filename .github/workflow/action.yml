@@ -1,0 +1,36 @@
+name: actiontest
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Updatesite:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login to Docker
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Generate image tag
+        id: vars
+        env:
+          Image_name: logeshK98/fincacalc
+        run: |
+          SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
+          TAG=$(date +%Y%m%d)-$SHORT_SHA
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t $Image_name:$TAG .
+          docker push $Image_name:$TAG
+
+      - name: Deploy to server
+        run: |
+          docker pull $Image_name:$TAG
+          docker stop fincacalc || true
+          docker rm fincacalc || true
+          docker run -d --name fincacalc -p 7071:80 $Image_name:$TAG
+             
