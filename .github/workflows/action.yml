@@ -9,7 +9,7 @@ jobs:
   Updatesite:
     runs-on: self-hosted
     env:
-      Image_name: logeshK98/fincacalc
+      Image_name: logeshk98/fincacalc
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
