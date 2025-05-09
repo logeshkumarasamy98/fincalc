@@ -1,15 +1,17 @@
 name: actiontest1
+
 on:
   push:
     branches:
       - main
+
 jobs:
   Updatesite:
     runs-on: self-hosted
     env:
-     Image_name: logeshK98/fincacalc
+      Image_name: logeshK98/fincacalc
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Login to Docker
@@ -20,21 +22,28 @@ jobs:
 
       - name: Generate image tag
         id: vars
-
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)
           TAG=$(date +%Y%m%d)-$SHORT_SHA
           echo "TAG=$TAG" >> $GITHUB_ENV
 
-      - name: Build and push Docker image
+      - name: Build Docker image
         run: |
           docker build -t $Image_name:$TAG .
+          docker images # Check if image is created successfully
+
+      - name: Push Docker image to Docker Hub
+        run: |
           docker push $Image_name:$TAG
 
       - name: Deploy to server
         run: |
+          # Pull the image
           docker pull $Image_name:$TAG
+
+          # Stop and remove existing container if it exists
           docker stop fincacalc || true
           docker rm fincacalc || true
+
+          # Run the new container
           docker run -d --name fincacalc -p 7071:80 $Image_name:$TAG
-             
